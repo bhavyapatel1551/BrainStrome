@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%=pageTitle%>
+  </title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href='https://unpkg.com/css.gg@2.0.0/icons/css/share.css' rel='stylesheet'>
+  <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      background: #e5ded8;
+      box-sizing: border-box;
+    }
+
+    /* // Blog container
+      //------------------------- */
+    .blog-container {
+      background: #fff;
+      border-radius: 5px;
+      box-shadow: hsla(0, 0, 0, .2) 0 4px 2px -2px;
+      font-family: "adelle-sans", sans-serif;
+      font-weight: 100;
+      margin: 48px auto;
+      width: 20rem;
+
+      @media screen and (min-width: 480px) {
+        width: 28rem;
+      }
+
+      @media screen and (min-width: 767px) {
+        width: 40rem;
+      }
+
+      @media screen and (min-width: 959px) {
+        width: 50rem;
+      }
+    }
+
+    .blog-container a {
+      color: #4d4dff;
+      text-decoration: none;
+      transition: .25s ease;
+
+      &:hover {
+        border-color: #ff4d4d;
+        color: #ff4d4d;
+      }
+    }
+
+    /* // Blog header
+      //------------------------- */
+    .blog-cover {
+
+      background-size: cover;
+      border-radius: 5px 5px 0 0;
+      height: 15rem;
+      box-shadow: inset hsla(0, 0, 0, .2) 0 64px 64px 16px;
+    }
+
+    .blog-author,
+    .blog-author--no-cover {
+      margin: 0 auto;
+      padding-top: .125rem;
+      width: 80%;
+    }
+
+    .blog-author h3::before,
+    .blog-author--no-cover h3::before {
+      /* background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/17779/russ.jpeg'); */
+      background-size: cover;
+      border-radius: 50%;
+      content: " ";
+      display: inline-block;
+      height: 32px;
+      margin-right: .5rem;
+      position: relative;
+      top: 8px;
+      width: 32px;
+    }
+
+    .blog-author h3 {
+      color: #fff;
+      font-weight: 100;
+    }
+
+    .blog-author--no-cover h3 {
+      color: lighten(#333, 40%);
+      font-weight: 100;
+    }
+
+    /* // Blog body
+      //------------------------- */
+    .blog-body {
+      margin: 0 auto;
+      width: 80%;
+    }
+
+    .video-body {
+      height: 100%;
+      width: 100%;
+    }
+
+    .blog-title h1 a {
+      color: #333;
+      font-weight: 100;
+    }
+
+    .blog-summary p {
+      color: lighten(#333, 10%);
+    }
+
+    .blog-tags ul {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .blog-tags li+li {
+      margin-left: .5rem;
+    }
+
+    .blog-tags a {
+      border: 1px solid lighten(#333, 40%);
+      border-radius: 3px;
+      color: lighten(#333, 40%);
+      font-size: .75rem;
+      height: 1.5rem;
+      line-height: 1.5rem;
+      letter-spacing: 1px;
+      padding: 0 .5rem;
+      text-align: center;
+      text-transform: uppercase;
+      white-space: nowrap;
+      width: 5rem;
+    }
+
+    /* blog footer */
+    .blog-footer {
+      border-top: 1px solid lighten(#333, 70%);
+      margin: 0 auto;
+      padding-bottom: .125rem;
+      width: 80%;
+    }
+
+    .blog-footer ul {
+      list-style: none;
+      display: flex;
+      flex: row wrap;
+      justify-content: flex-end;
+      padding-left: 0;
+    }
+
+    .blog-footer li:first-child {
+      margin-right: auto;
+    }
+
+    .blog-footer li+li {
+      margin-left: .5rem;
+    }
+
+    .blog-footer li {
+      color: lighten(#333, 40%);
+      font-size: .75rem;
+      height: 1.5rem;
+      letter-spacing: 1px;
+      line-height: 1.5rem;
+      text-align: center;
+      text-transform: uppercase;
+      position: relative;
+      white-space: nowrap;
+
+      & a {
+        color: lighten(#333, 40%);
+      }
+    }
+
+    .like {
+      margin-right: 1rem;
+      margin-left: 10em;
+    }
+
+    .shares {
+      margin-top: .75em;
+      display: inline-block;
+      font-size: 24px;
+      /* Initial size of the icon */
+      transition: transform 0.2s ease, color 0.2s ease;
+      /* Add a smooth transition on transform and color */
+      cursor: pointer;
+      /* Show pointer cursor on hover */
+    }
+
+    /* Styles for the icon on hover */
+    .shares:hover {
+      transform: scale(1.1);
+      /* Increase the size by 10% on hover */
+      color: rgb(156, 1, 156);
+      /* Change the color on hover (you can use any color you like) */
+    }
+
+
+    .published-date {
+      border: 1px solid lighten(#333, 40%);
+      border-radius: 3px;
+      padding: 0 .5rem;
+    }
+
+    .numero {
+      position: relative;
+      top: -0.5rem;
+    }
+
+    /* // Icons
+      //------------------------- */
+    .icon-star,
+    .icon-bubble {
+      fill: lighten(#333, 40%);
+      height: 24px;
+      margin-right: .5rem;
+      transition: .25s ease;
+      width: 24px;
+
+      &:hover {
+        fill: #ff4d4d;
+      }
+    }
+
+    .top-container {
+      margin-left: 5em;
+      display: flex;
+      align-items: center;
+    }
+
+    .profile-image {
+      border-radius: 50%;
+      height: 2.5em;
+      width: 2.5em;
+    }
+
+    .name {
+      font-size: 15px;
+      font-weight: bold;
+      color: #272727;
+      position: relative;
+      top: 4px;
+      margin-top: 1em;
+      margin-left: 1em;
+    }
+
+    .copy-notification {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 20px;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      font-size: 16px;
+      border-radius: 5px;
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .copy-notification.show {
+      opacity: 1;
+    }
+
+    /* like button  */
+    /* .btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 10px;
+  border: none;
+  margin-right: 1em;
+  margin-left: 4em;
+  background-color: transparent;
+  position: relative;
+}
+
+.btn::after {
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  font-size: 15px;
+  color: rgb(15, 14, 14);
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  opacity: 0;
+  visibility: hidden;
+  transition: .2s linear;
+  top: 115%;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+  transition: .2s linear;
+}
+
+.icon path {
+  fill: rgb(21, 20, 20);
+  transition: .2s linear;
+}
+
+.btn:hover > .icon {
+  transform: scale(1.2);
+}
+
+.btn:hover > .icon path {
+  fill: rgb(156, 1, 156);
+}
+
+.btn:hover::after {
+  visibility: visible;
+  opacity: 1;
+  top: 105%;
+}
+.btn.clicked .heart-icon {
+  fill: red; /* Change the fill color to red when clicked */
+    /* .like_count{
+    margin-top: -.5em;
+    margin-left: 3.4em;
+} */
+    /* Styles for the heart icon container */
+    .heart-container {
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    /* Styles for the heart icon */
+    .heart-icon {
+      width: 24px;
+      height: 24px;
+      fill: black;
+      /* Initial color of the heart icon */
+      transition: fill 0.2s ease;
+    }
+
+    /* Change the fill color on click */
+    .heart-icon.clicked {
+      fill: red;
+      /* Change the fill color to red when clicked */
+    }
+
+    .likecount {
+      margin-top: -.5em;
+    }
+
+
+    .like-button {
+      font-size: 20px;
+      color: #ccc;
+      transition: color 0.3s;
+    }
+
+    .like-button.liked {
+      color: red;
+    }
+
+    .like-button:hover {
+      cursor: pointer;
+    }
+
+    .like-button i {
+      animation: pulseHeart 0.8s infinite;
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-bottom: 56.25%;
+      /* 16:9 aspect ratio for widescreen videos */
+    }
+
+    /* Add styles for the video element */
+    .video-body {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Style the video controls */
+    .video-body::-webkit-media-controls {
+      display: flex;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      border-radius: 5px;
+      padding: 10px;
+    }
+
+    .video-body::-webkit-media-controls-play-button,
+    .video-body::-webkit-media-controls-start-playback-button {
+      display: none;
+      /* Hide the default play button */
+    }
+
+    .video-body::-webkit-media-controls-volume-slider,
+    .video-body::-webkit-media-controls-mute-button,
+    .video-body::-webkit-media-controls-timeline,
+    .video-body::-webkit-media-controls-fullscreen-button {
+      display: none;
+      /* Hide other controls you may not need */
+    }
+  </style>
+</head>
+
+<body>
+  <%- include('../includes/head.ejs')%>
+    <%- include('../includes/navbar.ejs')%>
+
+      <% if (isAuth) { %>
+        <div class="main-container">
+          <div class="heading">
+            <h1 class="heading__title"></h1>
+            <button class="btn btn-outline-light btn-lg px-5" type="button"
+              onclick="window.location.href='/feed/postThought'">Post</button>
+          </div>
+          <% thoughts.forEach(function(th) { %>
+            <div class="blog-container">
+              <div class="blog-header">
+                <div class="top-container">
+                  <% if (th.imageUrl) { %>
+                    <a href="/user/profile/<%= th.creator %>">
+                      <img src="<%= th.imageUrl %>" class="img-fluid profile-image" alt="Profile Image" width="70">
+                    </a>
+
+
+                    <div class="ml-3">
+                      <h5 class="name">
+                        <%= th.creator %>
+                      </h5>
+
+                      <% } %>
+                    </div>
+                </div>
+              </div>
+
+              <div class="blog-body">
+                <% if(th.videoUrl){%>
+                  <div class="video-container">
+                    <video class="video-body" id="bgvid">
+                      <source src="<%= th.videoUrl %>" type="video/mp4">
+                    </video>
+                  </div>
+                  <%}%>
+
+                    <% if(th.imgUrl){%>
+                      <img src="<%= th.imgUrl %>" alt="Post Image"
+                        style="height: 20em; width: 40em; border-radius: 1em;">
+                      <%}%>
+                        <div class="blog-title">
+                          <h1>
+                            <%= th.title %>
+                          </h1>
+                        </div>
+                        <% if (th.location) { %>
+                          <div class="blog-title">
+                            <h1>
+                              <a href="#" class="location-link" data-location="<%= th.location %>" target="_blank">
+                                <%= th.location %>
+                              </a>
+                            </h1>
+                          </div>
+                          <% } %>
+                            <div class="blog-summary">
+
+                              <p>
+                                <%=(th.thought) %>
+                              </p>
+
+                              <label for="text">Text to Translate:</label>
+                              <textarea id="text" name="text" rows="4" cols="50" required></textarea><br><br>
+
+                              <label for="from">From Language:</label>
+                              <select id="from" name="from">
+                                <option value="en">English</option>
+                                <option value="es">Spanish</option>
+                                <!-- Add more language options as needed -->
+                              </select><br><br>
+
+                              <label for="to">To Language:</label>
+                              <select id="to" name="to">
+                                <option value="es">Spanish</option>
+                                <option value="en">English</option>
+                                <!-- Add more language options as needed -->
+                              </select><br><br>
+
+                              <button id="translateButton">Translate</button>
+
+                              <div id="translationResult"></div>
+                            </div>
+                            <div class="blog-tags">
+                              <ul>
+                                <% for (let i=0; i < th.hashtags.length; i++) { %>
+                                  <li><a href="/feed/related/<%= th.hashtags[i] %>">#<%= th.hashtags[i] %></a></li>
+                                  <% } %>
+                              </ul>
+                            </div>
+              </div>
+
+              <div class="comment-section">
+                <h3>Comments:</h3>
+                <ul>
+                  <% th.comments.forEach(function (comment) { %>
+                    <li><strong>
+                        <%= comment.user %>:
+                      </strong>
+                      <%= comment.comment %>
+                    </li>
+                    <% if (comment.id===th.currentUserId) { %>
+                      <form action="/feed/deleteComment/<%= th._id %>/<%= comment.cid %>" method="POST">
+                        <button type="submit" class="delete-btn">Delete</button>
+                      </form>
+                      <% } %>
+                        <% }); %>
+                </ul>
+                <form action="/feed/comment/<%= th._id %>" method="post">
+                  <input type="text" name="comment" placeholder="Write a comment" required />
+                  <button type="submit">Comment</button>
+                </form>
+              </div>
+
+              <div class="blog-footer">
+                <ul>
+                  <li class="published-date">
+                    <%= th.createdAt %>
+                  </li>
+                  <li class="like">
+                    <button class="like-button" data-thought-id="<%= th._id %>">
+                      <i class="fas fa-heart"></i>
+                      <span class="like-count">
+                        <%= th.likes %>
+                      </span>
+                    </button>
+                  </li>
+                  <li class="shares">
+                    <a href="#" class="share-link" data-share-url="localhost:8080/feed/share/<%= th._id %>">Share</a>
+                  </li>
+                  <li>
+                    <%if(th.creatorId !=th.currentUserId && !th.isFollowing){%>
+                      <button class="follow-button" data-thought-id="<%= th._id %>">Follow</button>
+
+                      <%}%>
+
+                  </li>
+                </ul>
+              </div>
+
+
+              <% }); %>
+            </div>
+            <% } %>
+              <div id="copy-notification" class="copy-notification"></div>
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
+              <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+              <script>
+                // Get the heart icon element
+                // const heartIcon = document.querySelector('.heart-container');
+
+                // // Add click event listener to the heart icon
+                // heartIcon.forEach(button => {
+                //   button.addEventListener('click',async  () => {
+                //     // Toggle the "clicked" class on the heart icon when it's clicked
+                //     heartIcon.classList.toggle('clicked');
+                //     const thoughtId = event.target.dataset.thoughtId;
+                //     const response = await fetch(`/feed/like/${thoughtId}`, {
+                //       method: 'POST',
+                //       headers: {
+                //         'Content-Type': 'application/json'
+                //       }
+                //     });
+
+                //     if (response.ok) {
+                //       const data = await response.json();
+                //       const likeCountElement = button.querySelector('.likecount');
+                //       likeCountElement.textContent = data.likes;
+                //     } else {
+                //       console.error('An error occurred while toggling like state');
+                //     }
+                //   });
+                // });
+                //                 const heartIcon = document.querySelector('.fa-regular fa-heart');
+
+                // // Add click event listener to the heart icon
+                // heartIcon.addEventListener('click', () => {
+                //   // Toggle the "clicked" class on the heart icon when it's clicked
+                //   heartIcon.classList.toggle('clicked');
+                // });
+
+                // const likeButtons = document.querySelectorAll('.like-button');
+
+                //             likeButtons.forEach(button => {
+                //               button.addEventListener('click', async (event) => {
+                //                 const thoughtId = event.target.dataset.thoughtId;
+                //                 const response = await fetch(`/feed/like/${thoughtId}`, {
+                //                   method: 'POST',
+                //                   headers: {
+                //                     'Content-Type': 'application/json'
+                //                   }
+                //                 });
+
+                //                 if (response.ok) {
+                //                   const data = await response.json();
+                //                   const likeCountElement = button.querySelector('.like-count');
+                //                   likeCountElement.textContent = data.likes;
+                //                 } else {
+                //                   console.error('An error occurred while toggling like state');
+                //                 }
+                //               });
+                //             });
+
+                const likeButtons = document.querySelectorAll('.like-button');
+
+                likeButtons.forEach(button => {
+                  button.addEventListener('click', async (event) => {
+                    // Use event.currentTarget instead of event.target to get the button element
+                    const thoughtId = event.currentTarget.dataset.thoughtId;
+                    const response = await fetch(`/feed/like/${thoughtId}`, {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      }
+                    });
+
+                    if (response.ok) {
+                      const data = await response.json();
+                      const likeCountElement = button.querySelector('.like-count');
+                      likeCountElement.textContent = data.likes;
+                    } else {
+                      console.error('An error occurred while toggling like state');
+                    }
+                  });
+                });
+
+
+                //                 const heartIcon = document.querySelector('.heart-icon');
+
+                // // Add click event listener to the heart icon
+                // heartIcon.addEventListener('click', async () => {
+                //   // Toggle the "clicked" class on the heart icon when it's clicked
+                //   heartIcon.classList.toggle('clicked');
+                //   const thoughtId = heartIcon.dataset.thoughtId;
+                //   const response = await fetch(`/feed/like/${thoughtId}`, {
+                //     method: 'POST',
+                //     headers: {
+                //       'Content-Type': 'application/json'
+                //     }
+                //   });
+
+                //   if (response.ok) {
+                //     const data = await response.json();
+                //     const likeCountElement = heartIcon.parentElement.querySelector('.likecount');
+                //     likeCountElement.textContent = data.likes;
+                //   } else {
+                //     console.error('An error occurred while toggling like state');
+                //   }
+                // });
+
+                const followButtons = document.querySelectorAll('.follow-button');
+
+                followButtons.forEach(button => {
+                  button.addEventListener('click', async (event) => {
+                    const thoughtId = event.target.dataset.thoughtId;
+                    console.log(thoughtId);
+                    const response = await fetch('/feed/follow', {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({ thoughtId })
+                    });
+
+                    if (response.ok) {
+                      // Handle success, e.g., display a success message or update UI
+                      console.log('Successfully followed the thought\'s creator');
+                      location.reload();
+                    } else {
+                      // Handle error, e.g., display an error message or show an alert
+                      console.log('An error occurred while following the thought\'s creator');
+                    }
+                  });
+                });
+
+
+                const shareLinks = document.querySelectorAll('.share-link');
+                const copyNotification = document.getElementById('copy-notification');
+
+                shareLinks.forEach(shareLink => {
+                  shareLink.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const shareUrl = shareLink.dataset.shareUrl;
+
+                    navigator.clipboard.writeText(shareUrl)
+                      .then(() => {
+                        showCopyNotification('Link copied to clipboard');
+                      })
+                      .catch((error) => {
+                        console.error('Failed to copy share link:', error);
+                      });
+                  });
+                });
+
+                function showCopyNotification(message) {
+                  copyNotification.textContent = message;
+                  copyNotification.classList.add('show');
+
+                  setTimeout(() => {
+                    copyNotification.textContent = '';
+                    copyNotification.classList.remove('show');
+                  }, 2000);
+                }
+
+                  // const likeButtons = document.querySelectorAll('.heart-icon');
+
+                  // likeButtons.forEach(button => {
+                  //   button.addEventListener('click', async (event) => {
+                  //     heartIcon.classList.toggle('clicked');
+                  //     const thoughtId = event.target.dataset.thoughtId;
+                  //     const response = await fetch(`/feed/like/${thoughtId}`, {
+                  //       method: 'POST',
+                  //       headers: {
+                  //         'Content-Type': 'application/json'
+                  //       }
+                  //     });
+
+                  //     if (response.ok) {
+                  //       const data = await response.json();
+                  //       const likeCountElement = button.querySelector('.likecount');
+                  //       likeCountElement.textContent = data.likes;
+                  //     } else {
+                  //       console.error('An error occurred while toggling like state');
+                  //     }
+                  //   });
+                  // }); 
+              </script>
+              <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+              <script>
+                // Function to open the map with the location's coordinates
+                async function openMapWithLocation(location) {
+                  const apiKey = '082a1f35ec974667860de9a433753ff7';
+                  const url = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(location)}&key=${apiKey}`;
+
+                  try {
+                    const response = await fetch(url);
+                    const data = await response.json();
+                    const results = data.results;
+
+                    if (results.length > 0) {
+                      const lat = results[0].geometry.lat;
+                      const lng = results[0].geometry.lng;
+
+                      // Open the map with the location's coordinates
+                      const map = L.map('map').setView([lat, lng], 10);
+                      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+                      L.marker([lat, lng]).addTo(map);
+                    } else {
+                      console.error('Location not found:', location);
+                    }
+                  } catch (error) {
+                    console.error('Error making API request:', error.message);
+                  }
+                }
+
+                // Add click event listener to the location link
+                const locationLinks = document.querySelectorAll('.location-link');
+                locationLinks.forEach(link => {
+                  link.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const location = event.target.dataset.location;
+                    openMapWithLocation(location);
+                  });
+                });
+
+
+
+  //               $(document).ready(function () {
+  //   $('#translateButton').click(function () {
+  //     const textToTranslate = $('#text').val();
+  //     const apiKey = 'YOUR_YANDEX_API_KEY'; // Replace with your Yandex.Translate API key
+  //     const targetLanguage = document.getElementById('to').value;; // Replace with the target language code
+
+  //     const apiUrl = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=${apiKey}&text=${encodeURIComponent(textToTranslate)}&lang=en-${targetLanguage}`;
+
+  //     $.ajax({
+  //       type: 'GET',
+  //       url: apiUrl,
+  //       dataType: 'json',
+  //       success: function (response) {
+  //         if (response.code === 200) {
+  //           const translatedText = response.text[0];
+  //           $('#translationResult').text(`Translated Text: ${translatedText}`);
+  //         } else {
+  //           $('#translationResult').text('Translation failed');
+  //         }
+  //       },
+  //       error: function () {
+  //         $('#translationResult').text('An error occurred during translation.');
+  //       }
+  //     });
+  //   });
+  // });
+
+ 
+  const translateButton = document.getElementById('translateButton');
+  const translationResult = document.getElementById('translationResult');
+
+  translateButton.addEventListener('click', async () => {
+    const text = document.getElementById('text').value;
+    const from = document.getElementById('from').value;
+    const to = document.getElementById('to').value;
+
+    const apiUrl = "https://libretranslate.com/translate";
+    const requestData = {
+      q: text,
+      source: from,
+      target: to,
+      format: "text"
+    };
+
+    try {
+      const response = await axios.post(apiUrl, requestData);
+      const data = response.data;
+
+      if (response.status === 200) {
+        const translatedText = data.translatedText;
+        translationResult.textContent = `Translated Text: ${translatedText}`;
+      } else {
+        translationResult.textContent = 'Translation failed';
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      translationResult.textContent = 'An error occurred during translation.';
+    }
+  });
+              </script>
+</body>
+
+</html>
